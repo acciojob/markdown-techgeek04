@@ -3,11 +3,20 @@ import ReactMarkdown from "react-markdown";
 import "./styles.css";
 
 const MarkdownApp = () => {
-  const [markdown, setMarkdown] = useState("# Welcome to Markdown Editor\n\nStart typing...\n\n- Bullet list\n- Another item\n\n**Bold Text**  
-_Italic Text_  
-`Inline code`  
+  const [markdown, setMarkdown] = useState(`
+# Welcome to Markdown Editor
 
-[Link](https://reactjs.org/)");
+Start typing...
+
+- Bullet list
+- Another item
+
+**Bold Text**  
+_Italic Text_  
+\`Inline code\`  
+
+[Link](https://reactjs.org/)
+`);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
