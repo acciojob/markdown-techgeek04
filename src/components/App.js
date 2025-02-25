@@ -1,46 +1,37 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import "./styles.css";
+import "./App.css";
 
-const MarkdownApp = () => {
-  const [markdown, setMarkdown] = useState(`
-# Welcome to Markdown Editor
-
-Start typing...
-
-- Bullet list
-- Another item
-
-**Bold Text**  
-_Italic Text_  
-\`Inline code\`  
-
-[Link](https://reactjs.org/)
-`);
+function Markdown() {
+  const [markdown, setMarkdown] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const handleChange = (e) => {
+    setMarkdown(e.target.value);
+  };
+
+  const changeLoadingVar = () => {
+    setLoading(false);
+  };
+
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(changeLoadingVar, 3000);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="app">
-      {loading ? (
-        <p className="loading">Loading...</p>
-      ) : (
-        <>
-          <textarea
-            className="textarea"
-            value={markdown}
-            onChange={(e) => setMarkdown(e.target.value)}
-          />
-          <div className="preview">
-            <ReactMarkdown>{markdown}</ReactMarkdown>
-          </div>
-        </>
-      )}
+      <textarea className="textarea" onChange={handleChange} />
+      <ReactMarkdown className="preview">{markdown}</ReactMarkdown>
     </div>
   );
-};
+}
 
-export default MarkdownApp;
+export default Markdown;
